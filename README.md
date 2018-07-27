@@ -4,13 +4,6 @@
 
 ### Apache 2.4 + PHP 7.0 + OPCache + MariaDB + N98 Magerun 2 + XDebug + Redis
 
-[![Build Status](https://travis-ci.org/clean-docker/Magento2.svg?branch=master)](https://travis-ci.org/clean-docker/Magento2)
-[![Docker Build](https://img.shields.io/docker/build/rafaelcgstz/magento2.svg)](https://hub.docker.com/r/rafaelcgstz/magento2/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/rafaelcgstz/magento2.svg)](https://hub.docker.com/r/rafaelcgstz/magento2/)
-[![Docker Starts](https://img.shields.io/docker/stars/rafaelcgstz/magento2.svg)](https://hub.docker.com/r/rafaelcgstz/magento2/)
-[![Build Status](https://images.microbadger.com/badges/image/rafaelcgstz/magento2.svg)](https://microbadger.com/images/rafaelcgstz/magento2)
-[![Releases](https://img.shields.io/github/release/clean-docker/Magento2.svg)](https://github.com/clean-docker/Magento2/releases)
-
 ### Requirements
 
 **MacOS:**
@@ -30,7 +23,7 @@ Install [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubu
 Execute in your terminal, change the *MYMAGENTO2* to use the name of your project:
 
 ```
-curl -s https://raw.githubusercontent.com/clean-docker/Magento2/master/init | bash -s MYMAGENTO2 clone
+curl -s https://raw.githubusercontent.com/redstage/docker-linux-init/master/magento2/init | bash -s MYMAGENTO2 clone
 ```
 
 If you want to install the Magento 2, use like that:
@@ -83,5 +76,5 @@ or to run in the background using detached mode
 **Elasticsearch:** http://localhost:9200
 
 ### License
-
-MIT © 2018 [Rafael Corrêa Gomes](https://github.com/rafaelstz/) and [contributors](https://github.com/clean-docker/Magento2/graphs/contributors).
+This project is based in
+[Rafael Corrêa Gomes](https://github.com/rafaelstz/) docker environment: https://github.com/clean-docker/Magento2
