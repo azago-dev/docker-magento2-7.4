@@ -75,6 +75,23 @@ or to run in the background using detached mode
 
 **Elasticsearch:** http://localhost:9200
 
+### Docker Sync (Windows and Mac)
+
+On Windows and Mac make sure your docker-sync.yml file is properly set.
+Under `src` option make sure it reflects the Magento root folder, if not, update it accordingly.
+
+**Example:** You cloned your Magento project inside a folder called 'my_project': `docker-structure/src/my_project`.
+
+Update docker-sync.yml with:
+
+```
+	...
+	src: './src/my_project'
+    ...
+```
+
+So docker will synchronize correctly the VM and Host folders and ignore not needed files.
+
 ### License
 This project is based in
 [Rafael Corrêa Gomes](https://github.com/rafaelstz/) docker environment: https://github.com/clean-docker/Magento2
