@@ -52,16 +52,16 @@ Enjoy your new panels!
 | Commands  | Description  | Options & Examples |
 |---|---|---|
 | `./init`  | If you didn't use the CURL setup command above, please use this command changing the name of the project.  | `./init MYMAGENTO2` |
-| `./start`  | If you continuing not using the CURL you can start your container manually  | |
+| `./start`  | If you continuing not using the CURL you can start your container manually  | `./start loadbalancer` or `./start varnish` |
 | `./stop`  | Stop your project containers  | |
 | `./kill`  | Stops containers and removes containers, networks, volumes, and images created to the specific project  | |
-| `./shell`  | Access your container  | `./shell root` | |
-| `./magento`  | Use the power of the Magento CLI  | |
-| `./n98`  | Use the Magerun commands as you want | |
-| `./grunt-init`  | Prepare to use Grunt  | |
-| `./grunt`  | Use Grunt specifically in your theme or completely, it'll do the deploy and the watcher.  | `./grunt luma` |
-| `./xdebug`  |  Enable / Disable the XDebug | |
-| `./composer`  |  Use Composer commands | `./composer update` |
+| `./shell`  | Access your container  | `./shell root` `./shell root apache_container` | |
+| `./magento`  | Use the power of the Magento CLI  | `./magento apache_container clean:cache` |
+| `./n98`  | Use the Magerun commands as you want | `./n98 apache_container mage_run_command` |
+| `./grunt-init`  | Prepare to use Grunt  | `./grunt-init apache_container` |
+| `./grunt`  | Use Grunt specifically in your theme or completely, it'll do the deploy and the watcher.  | `./grunt luma` or `./grunt luma apache_container` |
+| `./xdebug`  |  Enable / Disable the XDebug | `./xdebug` or `./xdebug apache_container` |
+| `./composer`  |  Use Composer commands | `./composer update` or `composer update apache_container` |
 
 ### Elasticsearch 
 

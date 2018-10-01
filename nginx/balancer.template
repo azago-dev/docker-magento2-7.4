@@ -1,0 +1,13 @@
+upstream localhost {
+	server minion_1:8080;
+	server minion_2:8080;
+	server minion_3:8080;
+}
+ 
+server {
+   listen 80; 
+
+   location / {
+      proxy_pass http://localhost;
+   }
+}

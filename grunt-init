@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-docker-compose exec --user www-data apache npm i grunt
-docker-compose exec --user www-data apache npm i
-./magento deploy:mode:set developer
+container="apache"
+if [ "$2" != "" ]
+then
+    container=$2
+fi
+
+docker-compose exec --user www-data "$container" npm i grunt
+docker-compose exec --user www-data "$container" npm i
+./magento "$container" deploy:mode:set developer

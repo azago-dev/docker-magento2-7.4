@@ -1,2 +1,8 @@
 #!/usr/bin/env bash
-docker-compose exec --user www-data apache /var/www/html/bin/magento $@
+container="apache"
+if [ "$2" != "" ]
+then
+    container=$2
+fi
+
+docker-compose exec --user www-data "$container" /var/www/html/bin/magento $1

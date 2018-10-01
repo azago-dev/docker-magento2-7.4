@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
+container="apache"
+if [ "$2" != "" ]
+then
+    container=$2
+fi
+
 if [ -z "$1" ]
   then
-    docker-compose exec --user www-data apache grunt exec
-    docker-compose exec --user www-data apache grunt less
-    docker-compose exec --user www-data apache grunt deploy
-    docker-compose exec --user www-data apache grunt watch
+    docker-compose exec --user www-data "$container" grunt exec
+    docker-compose exec --user www-data "$container" grunt less
+    docker-compose exec --user www-data "$container" grunt deploy
+    docker-compose exec --user www-data "$container" grunt watch
 else
-    docker-compose exec --user www-data apache grunt exec:$@
-    docker-compose exec --user www-data apache grunt less:$@
-    docker-compose exec --user www-data apache grunt watch:$@
+    docker-compose exec --user www-data "$container" grunt exec:$1
+    docker-compose exec --user www-data "$container" grunt less:$1
+    docker-compose exec --user www-data "$container" grunt watch:$1
 fi
