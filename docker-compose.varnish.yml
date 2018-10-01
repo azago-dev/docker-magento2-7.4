@@ -12,7 +12,7 @@ services:
     depends_on:
       - apache
     networks:
-      - magento2_clean-network
+      - <project_name>-network
 
   apache:
     image: viniciusbord9/magento2:varnish
@@ -35,7 +35,7 @@ services:
     links:
       - db
     networks:
-      - magento2_clean-network
+      - <project_name>-network
 
   db:
     image: mariadb
@@ -49,7 +49,7 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
     networks:
-      - magento2_clean-network
+      - <project_name>-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -68,14 +68,14 @@ services:
     ports:
      - 6379
     networks:
-      - magento2_clean-network
+      - <project_name>-network
 
   redis-session:
     image: redis
     ports:
      - 6379
     networks:
-      - magento2_clean-network
+      - <project_name>-network
 
   mailhog:
     image: mailhog/mailhog
@@ -83,10 +83,10 @@ services:
       - 1025:1025
       - 8025:8025
     networks:
-      - magento2_clean-network
+      - <project_name>-network
 
 networks:
-  magento2_clean-network:
+  <project_name>-network:
     driver: bridge
 
 volumes:
