@@ -1,2 +1,8 @@
 #!/usr/bin/env bash
-docker-compose exec --user www-data apache composer $@
+container="apache"
+if [ "$2" != "" ]
+then
+    container=$2
+fi
+
+docker-compose exec --user www-data "$container" composer $1

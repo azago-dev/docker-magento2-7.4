@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
-docker-compose exec --user root apache git clone https://github.com/magento/marketplace-eqp.git /var/www/.composer/vendor/magento/marketplace-eqp
-docker-compose exec --user root apache bash -c 'cd /var/www/.composer/vendor/magento/marketplace-eqp && composer install'
+container="apache"
+if [ "$2" != "" ]
+then
+    container=$2
+fi
+
+docker-compose exec --user root "$container" git clone https://github.com/magento/marketplace-eqp.git /var/www/.composer/vendor/magento/marketplace-eqp
+docker-compose exec --user root "$container" bash -c 'cd /var/www/.composer/vendor/magento/marketplace-eqp && composer install'

@@ -1,2 +1,8 @@
 #!/usr/bin/env bash
-docker-compose exec --user www-data apache n98-magerun2.phar $@
+container="apache"
+if [ "$2" != "" ]
+then
+    container=$2
+fi
+
+docker-compose exec --user www-data "$container" n98-magerun2.phar $1

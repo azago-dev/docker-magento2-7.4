@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
+container="apache"
+if [ "$2" != "" ]
+then
+    container=$2
+fi
 
-docker-compose exec --user root apache xdebug
+docker-compose exec --user root "$container " xdebug

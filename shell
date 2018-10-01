@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
+container="apache"
+if [ "$2" != "" ]
+then
+    container=$2
+fi
+
 if [ -z "$1" ]
   then
-    docker-compose exec --user www-data apache bash
+    docker-compose exec --user www-data "$container" bash
 else
-    docker-compose exec --user $@ apache bash
+    docker-compose exec --user $1 "$container" bash
 fi

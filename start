@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-docker-compose up -d && \
-version=$(git describe --tags $(git rev-list --tags --max-count=1))
-echo "
+if [ "$1" = "loadbalancer" ] 
+then
+      docker-compose -f docker-compose.loadbalancer.yml up -d && \
+      version=$(git describe --tags $(git rev-list --tags --max-count=1))
+      echo "
 ===================== 🚀 Done 🚀 ===================
 
       v.$version
@@ -12,3 +14,33 @@ echo "
       ✉️ Local emails: http://localhost:8025
 
 ===================== 🚀 Done 🚀 ==================="
+elif [ "$1" = "varnish" ]
+then
+      docker-compose -f docker-compose.varnish.yml up -d && \
+      version=$(git describe --tags $(git rev-list --tags --max-count=1))
+      echo "
+===================== 🚀 Done 🚀 ===================
+
+      v.$version
+      Access your new links:
+
+      🌎 Web server: http://localhost/
+      ⚙️ PHPMyAdmin: http://localhost:8080
+      ✉️ Local emails: http://localhost:8025
+
+===================== 🚀 Done 🚀 ==================="
+else
+      docker-compose up -d && \
+      version=$(git describe --tags $(git rev-list --tags --max-count=1))
+      echo "
+===================== 🚀 Done 🚀 ===================
+
+      v.$version
+      Access your new links:
+
+      🌎 Web server: http://localhost/
+      ⚙️ PHPMyAdmin: http://localhost:8080
+      ✉️ Local emails: http://localhost:8025
+
+===================== 🚀 Done 🚀 ==================="
+fi

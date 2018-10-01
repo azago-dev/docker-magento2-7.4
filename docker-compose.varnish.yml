@@ -1,0 +1,95 @@
+version: '2'
+services:
+  varnish:
+    image: million12/varnish
+    volumes:
+      - ./varnish:/tmp/
+    environment:
+      VCL_CONFIG: "/tmp/varnish.vcl"
+      VARNISHD_PARAMS: "-T localhost:6082 -S /etc/varnish/secret -p default_ttl=3600 -p default_grace=3600"
+    ports:
+      - "80:80"
+    depends_on:
+      - apache
+    networks:
+      - magento2_clean-network
+
+  apache:
+    image: viniciusbord9/magento2:varnish
+    # build: .
+    ports:
+      - "8081:8080"
+      - "9001:9000" # xdebug
+      # - "35729:35729" # live reload
+    volumes:
+      - ./src:/var/www/html
+      - ~/.composer:/var/www/.composer
+      - ~/.npm:/var/www/.npm
+      # - ~/.nvm:/var/www/.nvm
+    environment:
+      PORT: 8080
+      XDEBUG_CONFIG: "remote_host=localhost"
+      PHP_IDE_CONFIG: "serverName=Docker"
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - magento2_clean-network
+
+  db:
+    image: mariadb
+    ports:
+     - 3300:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=magento
+      - MYSQL_USER=magento
+      - MYSQL_PASSWORD=magento
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - magento2_clean-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+     - PMA_HOST=db
+     - PMA_USER=root
+     - PMA_PASSWORD=root
+     - MYSQL_ROOT_PASSWORD=root
+    ports:
+     - 8080:80
+    networks:
+      - magento2_clean-network
+
+  redis:
+    image: redis
+    ports:
+     - 6379
+    networks:
+      - magento2_clean-network
+
+  redis-session:
+    image: redis
+    ports:
+     - 6379
+    networks:
+      - magento2_clean-network
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - magento2_clean-network
+
+networks:
+  magento2_clean-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
+
