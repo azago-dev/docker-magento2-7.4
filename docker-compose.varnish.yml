@@ -61,7 +61,7 @@ services:
     ports:
      - 8080:80
     networks:
-      - magento2_clean-network
+      - <project_name>-network
 
   redis:
     image: redis
