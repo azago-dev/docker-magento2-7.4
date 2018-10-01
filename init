@@ -11,6 +11,7 @@ git config --global diff.renamelimit 5000
 sudo chmod -R u+x ./*
 
 docker image pull viniciusbord9/magento2
+docker image pull viniciusbord9/magento2:varnish
 
 if [ "$(uname)" == "Darwin" ]; then
     git checkout -f mac;
