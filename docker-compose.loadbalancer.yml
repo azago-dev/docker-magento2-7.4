@@ -5,7 +5,7 @@ services:
     volumes:
       - ./varnish:/tmp/
     environment:
-      VCL_CONFIG: "/tmp/varnish.vcl"
+      VCL_CONFIG: "/tmp/varnish_loadbalancer.vcl"
       VARNISHD_PARAMS: "-T localhost:6082 -S /etc/varnish/secret -p default_ttl=3600 -p default_grace=3600"
     ports:
       - "80:80"
@@ -18,8 +18,6 @@ services:
     image: nginx
     volumes:
     - ./nginx/balancer.template:/etc/nginx/conf.d/balancer.template
-    - ./nginx/domain.key:/etc/nginx/domain.key
-    - ./nginx/domain.crt:/etc/nginx/domain.crt
     ports:
     - "8081:80"
     - "443:443"
