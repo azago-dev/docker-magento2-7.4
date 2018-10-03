@@ -5,14 +5,17 @@ import std;
 # For SSL offloading, pass the following header in your proxy server or load balancer: 'X-Forwarded-Proto: https'
 
 backend default {
-    .host = "apache_8080";
+    .host = "loadbalancer";
     .port = "80";
 }
 
 acl purge {
    "localhost";
    "127.0.0.1";
-   "apache_8080";
+   "loadbalancer";
+   "minion_1";
+   "minion_2";
+   "minion_3";
 }
 
 sub vcl_recv {
