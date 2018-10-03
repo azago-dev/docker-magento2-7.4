@@ -1,2 +1,10 @@
 #!/usr/bin/env bash
-docker-compose stop
+if [ "$1" = "varnish" ]
+then
+	docker-compose -f docker-compose.varnish.yml stop
+elif [ "$1" = "loadbalancer" ] 
+then
+	docker-compose -f docker-compose.loadbalancer.yml stop
+else
+	docker-compose stop
+fi
