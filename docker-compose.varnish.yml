@@ -10,11 +10,11 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - apache
+      - apache_8080
     networks:
       - <project_name>-network
 
-  apache:
+  apache_8080:
     image: viniciusbord9/magento2:varnish
     # build: .
     ports:

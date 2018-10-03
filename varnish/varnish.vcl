@@ -6,7 +6,7 @@ import std;
 
 backend default {
     .host = "apache_8080";
-    .port = "80";
+    .port = "8080";
 }
 
 acl purge {
