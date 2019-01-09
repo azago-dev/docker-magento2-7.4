@@ -75,6 +75,18 @@ or to run in the background using detached mode
 
 **Elasticsearch:** http://localhost:9200
 
+### Selenium 
+
+To use selenium container you can use this command below:
+
+`$ docker-compose -f docker-compose.yml -f docker-compose.selenium.yml up`
+
+or to run in the background using detached mode
+
+`$ docker-compose -f docker-compose.yml -f docker-compose.selenium.yml up -d`
+
+**Selenium:** http://localhost:4444
+
 ### Docker Sync (Windows and Mac)
 
 On Windows and Mac make sure your docker-sync.yml file is properly set.
