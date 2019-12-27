@@ -62,6 +62,10 @@ Enjoy your new panels!
 | `./grunt`  | Use Grunt specifically in your theme or completely, it'll do the deploy and the watcher.  | `./grunt luma` or `./grunt luma apache_container` |
 | `./xdebug`  |  Enable / Disable the XDebug | `./xdebug` or `./xdebug apache_container` |
 | `./composer`  |  Use Composer commands | `./composer update` or `composer update apache_container` |
+| `./import`  |  import the database into db container and update your domain | `./import file.sql yourlocaldomain.com`|
+| `./copy`  |  Copy a file from your computer to db docker container | `./copy file.sql`|
+| `./delete`  |  Delete a file from db docker container | `./delete file.sql`|
+| `./updateUrl`  |  update your URL from 'web/secure/base_url', 'web/unsecure/base_url'| `./updateUrl yourlocaldomain.com`|
 
 ### Elasticsearch 
 
