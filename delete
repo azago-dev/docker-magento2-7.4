@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+file=$1
+
+if [ "$2" != "" ]
+then
+	container=$2
+else
+	container=$(docker ps -qf "name=db")
+fi
+
+echo "::Deleting file $file into $container::"
+
+docker exec -it $container rm $file &&
+echo "The file $file was deleted successfully!"

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+url=$1
+if [ "$2" != "" ]
+then
+	container=$2
+else
+	container=$(docker ps -qf "name=db")
+fi
+
+if [[ $url == *"http"* ]]; then
+        echo "Error! Enter your URL without http, like: google.com"
+        exit 0;
+fi
+
+docker exec -i $container mysql -umagento -pmagento magento <<< "UPDATE core_config_data SET value = 'http://$url/' WHERE path IN ('web/secure/base_url', 'web/unsecure/base_url')" &&
+./magento c:f &&
+./magento c:c &&
+echo "Done! THe url was updated! http://$url/" 
+

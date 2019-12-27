@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+file=$1
+
+container=$(docker ps -qf "name=db")
+
+echo "::Moving file $file to $container::"
+
+docker cp $file $container:/ &&
+echo "The file $file was moved successfully!"

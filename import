@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+file=$1
+container=$(docker ps -qf "name=db")
+url=$2
+
+./copy $file &&
+echo "::Importing file $file Running, please wait::"
+
+docker exec -i $container mysql -umagento -pmagento  <<< "drop database magento" &&
+echo "Your database was deleted"
+docker exec -i $container mysql -umagento -pmagento  <<< "create database magento;" &&
+echo "Database magento created, importation started.."
+docker exec -i $container mysql -umagento -pmagento  <<< "use magento; source $file;" &&
+echo "Done! The file $file was successfully imported!" &&
+./delete $file &&
+./updateUrl $url &&
+echo "All done!"
