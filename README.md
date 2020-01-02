@@ -87,6 +87,11 @@ or to run in the background using detached mode
 
 **Selenium:** http://localhost:4444
 
+> https://github.com/SeleniumHQ/docker-selenium
+
+> You can connect to the selenium container through the VNC tool. Check it out below:
+> https://github.com/SeleniumHQ/docker-selenium#debugging
+
 ### Docker Sync (Windows and Mac)
 
 On Windows and Mac make sure your docker-sync.yml file is properly set.

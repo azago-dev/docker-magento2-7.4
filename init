@@ -20,6 +20,7 @@ if [ "$(uname)" == "Darwin" ]; then
     && sed -i '' -e "s/<project_name>/$1/g" docker-compose.elasticsearch.yml \
     && sed -i '' -e "s/<project_name>/$1/g" docker-compose.loadbalancer.yml \
     && sed -i '' -e "s/<project_name>/$1/g" docker-compose.varnish.yml \
+    && sed -i '' -e "s/<project_name>/$1/g" docker-compose.selenium.yml \
     && sed -i '' -e "s/<project_name>/$1/g" docker-sync.yml;
 elif [ "$(uname)" == "cygwin" ] || [ "$(uname)" == "msys" ] || [ "$(uname)" == "win32" ]; then
     git checkout -f windows;
@@ -28,12 +29,14 @@ elif [ "$(uname)" == "cygwin" ] || [ "$(uname)" == "msys" ] || [ "$(uname)" == "
     && sed -i '' -e "s/<project_name>/$1/g" docker-compose.elasticsearch.yml \
     && sed -i '' -e "s/<project_name>/$1/g" docker-compose.loadbalancer.yml \
     && sed -i '' -e "s/<project_name>/$1/g" docker-compose.varnish.yml \
+    && sed -i '' -e "s/<project_name>/$1/g" docker-compose.selenium.yml \
     && sed -i '' -e "s/<project_name>/$1/g" docker-sync.yml;
 else
     git checkout -f master;
     sed -i '' -e "s/<project_name>/$1/g" docker-compose.yml;
     sed -i '' -e "s/<project_name>/$1/g" docker-compose.elasticsearch.yml;
     sed -i '' -e "s/<project_name>/$1/g" docker-compose.loadbalancer.yml;
+    sed -i '' -e "s/<project_name>/$1/g" docker-compose.selenium.yml;
     sed -i '' -e "s/<project_name>/$1/g" docker-compose.varnish.yml;
 fi
 
