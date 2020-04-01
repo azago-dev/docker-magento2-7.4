@@ -1,0 +1,8 @@
+version: '2'
+services:
+  rabbitmq-management:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+    networks:
+      - <project_name>-network
