@@ -96,6 +96,23 @@ or to run in the background using detached mode
 > You can connect to the selenium container through the VNC tool. Check it out below:
 > https://github.com/SeleniumHQ/docker-selenium#debugging
 
+### RabbitMQ 
+
+To use RabbitMQ container you can use this command below:
+
+`$ docker-compose -f docker-compose.yml -f docker-compose.rabbitmq.yml up`
+
+or to run in the background using detached mode
+
+`$ docker-compose -f docker-compose.yml -f docker-compose.rabbitmq.yml up -d`
+
+**RabbitMQ:** http://localhost:15672/
+
+***RabbitMQ Management Access*** 
+
+> user: guest \
+> password: guest 
+
 ### Docker Sync (Windows and Mac)
 
 On Windows and Mac make sure your docker-sync.yml file is properly set.
