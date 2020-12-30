@@ -1,29 +1,32 @@
-FROM php:7.0-apache
+FROM php:7.4.12-apache
 
-MAINTAINER Vinicius Bordinhão <vbordinhao@redstage.com>
+MAINTAINER Andre Zago <andrezago88@gmail.com>
 
 ENV XDEBUG_PORT 9000
 
 # Install System Dependencies
 
-RUN apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+
+RUN apt-get update && apt-get install -y wget gnupg g++ locales unzip dialog apt-utils git && apt-get clean
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends apt-utils \	
 	software-properties-common \
-	python-software-properties \
 	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
 	libfreetype6-dev \
 	libicu-dev \
   	libssl-dev \
-	libjpeg62-turbo-dev \
-	libmcrypt-dev \
-	libpng12-dev \
+  	libmcrypt-dev \
+  	libzip-dev \
+  	libonig-dev \
+	libjpeg62-turbo-dev \	
+	libpng-dev \
+	libjpeg-dev \
 	libedit-dev \
 	libedit2 \
-	libxslt1-dev \
-	apt-utils \
+	libxslt1-dev \		
 	redis-tools \
-	mysql-client \
+	mariadb-client \
 	git \
 	vim \
 	wget \
@@ -39,18 +42,17 @@ RUN apt-get update \
 # Install Magento Dependencies
 
 RUN docker-php-ext-configure \
-  	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
+  	gd --with-freetype --with-jpeg; \
   	docker-php-ext-install \
   	opcache \
   	gd \
   	bcmath \
-  	intl \
-  	mbstring \
-  	mcrypt \
+  	intl \  	
   	pdo_mysql \
   	soap \
   	xsl \
-  	zip
+  	zip \
+  	sockets
 
 # Install oAuth
 
@@ -60,19 +62,12 @@ RUN apt-get update \
   	libpcre3-dev \
   	# php-pear \
   	&& pecl install oauth \
-  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
-
-# Install Node, NVM, NPM and Grunt
-
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-  	&& apt-get install -y nodejs build-essential \
-    && curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh \
-    && npm i -g grunt-cli yarn
+  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini \
+  	&& echo "memory_limit=8G" > /usr/local/etc/php/conf.d/docker-php-ext-memlimit.ini
 
 # Install Composer
 
-RUN	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
-RUN composer global require hirak/prestissimo
+RUN	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer --version=1.10.17
 
 # Install Code Sniffer
 
@@ -85,7 +80,7 @@ ENV PATH="/var/www/.composer/vendor/bin/:${PATH}"
 
 # Install XDebug
 
-RUN yes | pecl install xdebug && \
+RUN yes | pecl install xdebug-2.8.0 && \
 	 echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.iniOLD
 
 # Install Mhsendmail
@@ -105,7 +100,7 @@ RUN wget https://files.magerun.net/n98-magerun2.phar \
 
 ADD .docker/config/php.ini /usr/local/etc/php/php.ini
 ADD .docker/config/magento.conf /etc/apache2/sites-available/magento.conf
-ADD .docker/config/custom-xdebug.ini /usr/local/etc/php/conf.d/custom-xdebug.ini
+COPY .docker/config/custom-xdebug.ini /usr/local/etc/php/conf.d/custom-xdebug.ini
 COPY .docker/bin/* /usr/local/bin/
 COPY .docker/users/* /var/www/
 RUN chmod +x /usr/local/bin/*

@@ -1,0 +1,12 @@
+///It seems like magento obsolete web setup wizard in magento 2.4.0
+Starting with Magento 2.4.0, the Web Setup Wizard is removed, and you must use the command line
+
+#1 Install Magento via command line
+
+bin/magento setup:install --base-url=http://local.magento24.com/ \
+--db-host=db --db-name=magento --db-user=magento --db-password=magento \
+--admin-firstname=Admin --admin-lastname=Admin --admin-email=user@example.com \
+--admin-user=admin --admin-password=admin123 --language=en_US \
+--currency=USD --timezone=America/Chicago --use-rewrites=1 \
+--search-engine='elasticsearch7' --elasticsearch-host='localhost' \
+--elasticsearch-port='9200' 

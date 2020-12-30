@@ -5,4 +5,4 @@ then
     container=$2
 fi
 
-docker-compose exec --user root "$container " xdebug
+docker-compose exec --user root "$container" xdebug
