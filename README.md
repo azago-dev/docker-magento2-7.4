@@ -2,7 +2,7 @@
 
 #  Magento 2 Docker to Development
 
-### Apache 2.4 + PHP 7.0 + OPCache + MariaDB + N98 Magerun 2 + XDebug + Redis
+### Apache 2.4 + PHP 7.4 + OPCache + MariaDB + N98 Magerun 2 + XDebug + Redis
 
 ### Requirements
 
