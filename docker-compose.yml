@@ -32,7 +32,7 @@ services:
       - MYSQL_USER=magento
       - MYSQL_PASSWORD=magento
     volumes:
-      - dbdata:/var/lib/mysql
+      - ./dbdata:/var/lib/mysql
     networks:
       - <project_name>-network
 
